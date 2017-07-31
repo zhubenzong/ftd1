@@ -1,0 +1,11 @@
+org\ftd\mapper\TbOrderMapper.class
+org\ftd\mapper\TbItemCatMapper.class
+org\ftd\mapper\TbItemParamMapper.class
+org\ftd\mapper\TbItemParamItemMapper.class
+org\ftd\mapper\TbItemMapper.class
+org\ftd\mapper\TbOrderItemMapper.class
+org\ftd\mapper\TbContentCategoryMapper.class
+org\ftd\mapper\TbOrderShippingMapper.class
+org\ftd\mapper\TbItemDescMapper.class
+org\ftd\mapper\TbUserMapper.class
+org\ftd\mapper\TbContentMapper.class
