@@ -37,4 +37,5 @@
 	<dubbo:reference interface="org.ftd.service.ItemCatService" id="itemCatService" />
 	<dubbo:reference interface="org.ftd.content.service.ContentCategoryService" id="contentCategoryService" />
 	<dubbo:reference interface="org.ftd.content.service.ContentService" id="contentService" />
+	<dubbo:reference interface="org.ftd.search.service.SearchItemService" id="searchItemService" />
 </beans>

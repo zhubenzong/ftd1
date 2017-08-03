@@ -26,6 +26,18 @@ public class TbItem implements Serializable{
 
     private Date updated;
 
+    /*
+     * 将图片地址以，分开放入数组。供jsp使用
+     */
+    public String[] getImages(){
+    	String images = this.getImage();
+    	if(images!=null&&!images.equals("")){
+    		String[] strings = images.split(",");
+    		return strings;
+    	}
+    	return null;
+    }
+    
     public Long getId() {
         return id;
     }

@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.ftd.common.pojo.EasyUIDataGridResult;
+import org.ftd.mapper.TbItemDescMapper;
 import org.ftd.mapper.TbItemMapper;
 import org.ftd.pojo.TbItem;
 import org.ftd.pojo.TbItemDesc;
+import org.ftd.pojo.TbItemDescExample;
+import org.ftd.pojo.TbItemDescExample.Criteria;
 import org.ftd.pojo.TbItemExample;
 import org.ftd.service.ItemService;
 import org.ftd.utils.E3Result;
@@ -20,6 +23,9 @@ import com.github.pagehelper.PageInfo;
 public class ItemServiceImpl implements ItemService{
 	@Autowired
 	TbItemMapper itemMapper;
+	
+	@Autowired
+	TbItemDescMapper itemDescMapper;
 	
 	@Override
 	public TbItem getItemById(long id) {
@@ -103,6 +109,12 @@ public class ItemServiceImpl implements ItemService{
 			itemMapper.updateByPrimaryKeySelective(item);
 		}
 		return E3Result.ok();
+	}
+
+	@Override
+	public TbItemDesc getItemDescById(long id) {
+		TbItemDesc tbItemDesc = itemDescMapper.selectByPrimaryKey(id);
+		return tbItemDesc;
 	}
 	
 }

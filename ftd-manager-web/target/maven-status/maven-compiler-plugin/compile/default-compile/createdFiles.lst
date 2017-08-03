@@ -4,3 +4,4 @@ org\ftd\controller\ItemController.class
 org\ftd\controller\CategoryController.class
 org\ftd\controller\ContentCategoryController.class
 org\ftd\controller\PageController.class
+org\ftd\controller\ImportIndexController.class

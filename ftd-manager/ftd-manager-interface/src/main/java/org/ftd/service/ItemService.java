@@ -7,6 +7,7 @@ package org.ftd.service;
 
 import org.ftd.common.pojo.EasyUIDataGridResult;
 import org.ftd.pojo.TbItem;
+import org.ftd.pojo.TbItemDesc;
 import org.ftd.utils.E3Result;
 
 public interface ItemService {
@@ -44,4 +45,9 @@ public interface ItemService {
 	 * 商品下架
 	 */
 	public E3Result itemInstock(String ids);
+	
+	/*
+	 * 根据商品id查询商品描述
+	 */
+	public TbItemDesc getItemDescById(long id);
 }

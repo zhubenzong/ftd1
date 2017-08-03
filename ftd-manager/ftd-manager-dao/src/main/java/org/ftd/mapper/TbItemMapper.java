@@ -2,6 +2,7 @@ package org.ftd.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.ftd.common.pojo.SearchItem;
 import org.ftd.pojo.TbItem;
 import org.ftd.pojo.TbItemExample;
 
@@ -27,4 +28,8 @@ public interface TbItemMapper {
     int updateByPrimaryKeySelective(TbItem record);
 
     int updateByPrimaryKey(TbItem record);
+    
+    List<SearchItem> getItemList();
+    
+    SearchItem getItemById(long itemid);
 }

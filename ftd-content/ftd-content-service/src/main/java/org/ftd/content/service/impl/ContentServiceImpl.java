@@ -25,10 +25,15 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public List<TbContent> getContentListByCategoryId(long categoryId) {
-		String json = jedisClient.hget("INDEX_CONTENT", categoryId + "");
-		if (StringUtils.isNotBlank(json)) {
-			List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
-			return list;
+		try {
+			String json = jedisClient.hget("INDEX_CONTENT", categoryId + "");
+			if (StringUtils.isNotBlank(json)) {
+				List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
+				return list;
+			}
+		} catch (Exception e) {
+			System.out.println("连接redis失败");
+			e.printStackTrace();
 		}
 		// 新建查询Example
 		TbContentExample example = new TbContentExample();
@@ -37,8 +42,14 @@ public class ContentServiceImpl implements ContentService {
 		criteria.andCategoryIdEqualTo(categoryId);
 		// 执行查询
 		List<TbContent> list = contentMapper.selectByExample(example);
-		jedisClient.hset("INDEX_CONTENT", categoryId + "", JsonUtils.objectToJson(list));
+		try {
+			jedisClient.hset("INDEX_CONTENT", categoryId + "", JsonUtils.objectToJson(list));
+		} catch (Exception e) {
+			System.out.println("连接redis失败");
+			e.printStackTrace();
+		}
 		return list;
+
 	}
 
 	@Override
@@ -47,7 +58,7 @@ public class ContentServiceImpl implements ContentService {
 		tbContent.setCreated(new Date());
 		tbContent.setUpdated(new Date());
 		contentMapper.insert(tbContent);
-		//缓存同步
+		// 缓存同步
 		jedisClient.hdel("INDEX_CONTENT", tbContent.getCategoryId().toString());
 		return E3Result.ok();
 	}
@@ -67,7 +78,7 @@ public class ContentServiceImpl implements ContentService {
 		criteria.andIdIn(list);
 		// 执行查询
 		contentMapper.deleteByExample(example);
-		//缓存同步
+		// 缓存同步
 		jedisClient.hdel("INDEX_CONTENT");
 		return E3Result.ok();
 	}
@@ -78,7 +89,7 @@ public class ContentServiceImpl implements ContentService {
 		tbContent.setCreated(new Date());
 		tbContent.setUpdated(new Date());
 		contentMapper.updateByPrimaryKey(tbContent);
-		//缓存同步
+		// 缓存同步
 		jedisClient.hdel("INDEX_CONTENT", tbContent.getCategoryId().toString());
 		return E3Result.ok();
 	}
